@@ -1,24 +1,27 @@
 # DOMI Solutions
 
-Site institucional da DOMI Solutions. É um site estático: um `index.html` com o CSS dentro e as fotos em `assets/`. Não precisa de build nem de dependências.
+Site institucional em **Next.js + TypeScript**, com formulário de contato responsivo. As fotos do time permanecem em `assets/`.
 
-## Ver no computador
+## Rodar localmente
 
-Abra o `index.html` no navegador. As fontes (Google Fonts) precisam de internet.
+```bash
+npm install
+Copy-Item .env.example .env.local
+npm run dev
+```
 
-## Publicar no GitHub Pages
+Abra `http://localhost:3000`.
 
-1. Crie um repositório e envie estes arquivos para a branch `main`.
-2. Em **Settings > Pages**, escolha **Deploy from a branch**, branch `main`, pasta `/ (root)`.
-3. O site fica em `https://<usuario>.github.io/<repositorio>/`.
+## Configurar o recebimento dos contatos
 
-## O que ainda falta preencher
+O envio é feito pela [Resend](https://resend.com). Preencha `.env.local` a partir de `.env.example`:
 
-Procure no `index.html` por textos entre colchetes e troque:
+- `CONTACT_EMAIL`: e-mail que recebe as mensagens do formulário.
+- `EMAIL_FROM`: remetente verificado na Resend.
+- `RESEND_API_KEY`: chave da API da Resend.
 
-- `[EMAIL DE CONTATO]`
-- `[NÚMERO COM DDD]`
-- `[DIAS E HORÁRIOS]`
-- `[PRAZO DE RESPOSTA]`
+As variáveis nunca são expostas ao navegador. O endpoint `POST /api/contact` valida os campos e define o e-mail do visitante como `replyTo`.
 
-Antes de publicar, confirme os números do Real Deal (100+ usuários ativos, 70+ vendas concluídas) e a permissão dos clientes para mostrar os projetos.
+## Publicação
+
+Publique em uma plataforma com suporte a Next.js, como a Vercel. No painel da plataforma, configure as mesmas três variáveis de ambiente antes de publicar.
